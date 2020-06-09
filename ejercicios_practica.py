@@ -5,7 +5,6 @@ Ejercicios de práctica
 ---------------------------
 Autor: Inove Coding School
 Version: 1.1
-
 Descripcion:
 Programa creado para que practiquen los conocimietos
 adquiridos durante la semana
@@ -14,6 +13,33 @@ adquiridos durante la semana
 __author__ = "Inove Coding School"
 __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
+
+import random
+import math
+
+from ejercicios_clase import promedio, lista_aleatoria, ordenar, contar, buscar
+# 
+
+def factorial(numero, calculando=1):
+    if numero > 0:
+        calculando = calculando * numero
+        numero -= 1
+        factorial(numero, calculando)
+    else:
+         calculando = calculando * 1
+         if calculando == 0:
+            calculando = 1
+         print("El resultado del factorial da:", calculando)
+
+
+def calcular_desviacion(lista):
+    media = promedio(lista)
+    distancias = [(numero - media)**2 for numero in lista ]
+    desviacion = math.sqrt(
+        sum(distancias) / len(lista)
+    )
+    print("La desviacion estadistica es de: %.2f" %desviacion)
+    return desviacion
 
 
 def ej1():
@@ -62,6 +88,12 @@ def ej2():
     de números.
     Imprima en pantalla dicha lista de 3 valores.
     '''
+    tiros_dados = lista_aleatoria(1, 6, 5)
+    lista_ordenada = ordenar(tiros_dados)
+    print(lista_ordenada)
+    random.shuffle(lista_ordenada)    
+    #print(random.sample(tiros_dados, 3))
+    print(random.sample(lista_ordenada, 3))
 
 
 def ej3():
@@ -94,6 +126,8 @@ def ej3():
     Les dejamos este ejercicio para que lo piensen, lo pueden dejar para el final
     Cualquier duda nos escriben en el Campus
     '''
+    factorial(5)
+    factorial(0)
 
 
 def ej4():
@@ -131,6 +165,11 @@ def ej4():
     4 - Calcular la raiz cuadrada con el método de math correspondiente.
 
     '''
+    lista = lista_aleatoria(0, 100, 20)
+    print(lista)
+    calcular_desviacion(lista)  
+        
+
     # Mi implementación de desvió estandar a continuación:
 
     '''
@@ -190,6 +229,8 @@ def ej5():
     guardados" tenga "generala", es decir, 5 números iguales.
 
     '''
+    tiros_dados = lista_aleatoria(1, 6, 5)
+    #max(tiros_dados, key=list.count())
 
 
 if __name__ == '__main__':
@@ -198,4 +239,4 @@ if __name__ == '__main__':
     #ej2()
     #ej3()
     #ej4()
-    #ej5()
+    ej5()
