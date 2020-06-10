@@ -42,6 +42,32 @@ def calcular_desviacion(lista):
     return desviacion
 
 
+def generala(dados=5, tiradas=1, dados_guardados=[], numero_repetido=0):
+    '''"Simulador de generala"
+    
+    @param dados Indica la cantidad de dados que se usaran
+    @param tiradas Contador de tiradas'''
+
+    tiros_dados = lista_aleatoria(1, 6, dados)
+    if numero_repetido != 0:
+        pass
+    else:
+        numero_repetido = max(tiros_dados, key=tiros_dados.count)
+    indices_repetidos = buscar(tiros_dados, numero_repetido)
+    dados_guardados = dados_guardados + [tiros_dados[indice] for indice in indices_repetidos]
+    dados_para_tirar = [numero for numero in tiros_dados if numero not in dados_guardados]
+
+    print("Numeros sacados en la tirada {}: {}".format(tiradas, tiros_dados))
+    print("Dados guardados: {} | Dados restantes: {}".format(dados_guardados, dados_para_tirar))
+
+    if len(dados_para_tirar) == 0:
+        print("Generala!!!")
+        print("Tiradas para llegar a la generala:", tiradas)
+    else:
+        tiradas += 1
+        generala(len(dados_para_tirar), tiradas, dados_guardados, numero_repetido)
+
+
 def ej1():
     print('Comencemos a crear lo nuestro!')
 
@@ -229,14 +255,15 @@ def ej5():
     guardados" tenga "generala", es decir, 5 números iguales.
 
     '''
-    tiros_dados = lista_aleatoria(1, 6, 5)
-    #max(tiros_dados, key=list.count())
+    generala()
 
 
+
+    
 if __name__ == '__main__':
     print("Ejercicios de práctica")
     #ej1()
     #ej2()
     #ej3()
     #ej4()
-    ej5()
+    #ej5()
